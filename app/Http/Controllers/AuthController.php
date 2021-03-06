@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,9 +25,12 @@ class AuthController
         ]);
 
         if (Auth::attempt($data)) {
-            $user = Auth::user();
-            $user->password = Hash::make($data['password']);
-            $user->save();
+            if (Hash::needsRehash(User::find(Auth::id())->password)) {
+                $user = User::find(Auth::id());
+                $user->password
+                    = Hash::make($request->only('password')['password']);
+                $user->save();
+            }
 
             return redirect()->route('admin');
         }
