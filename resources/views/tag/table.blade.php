@@ -8,11 +8,10 @@
         <a class="btn btn-secondary" href="{{ route('admin') }}">Back</a>
     </div>
 
-    @if (isset($_SESSION['message']))
-        <div class="alert alert-{{ $_SESSION['message']['status'] }}" role="alert">
-            {{ $_SESSION['message']['text'] }}
+    @if (session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
         </div>
-        @unset ($_SESSION['message'])
     @endif
 
     <table class="table table-striped">

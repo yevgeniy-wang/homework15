@@ -37,12 +37,7 @@ class UserController
         $user->email_verified_at = now();
         $user->save();
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "User \"{$user->name}\" successfully saved"
-        ];
-
-        return redirect()->route('users');
+        return redirect()->route('users')->with('success', "User \"{$user->title}\" successfully saved");
     }
 
     public function edit(User $user)
@@ -63,24 +58,14 @@ class UserController
 
         $user->update($data);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "User \"{$user->name}\" successfully saved"
-        ];
-
-        return redirect()->route('users');
+        return redirect()->route('users')->with('success', "User \"{$user->title}\" successfully saved");
     }
 
     public function destroy(User $user)
     {
         $user->delete();
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "User \"{$user->name}\" successfully deleted"
-        ];
-
-        return redirect()->route('users');
+        return redirect()->route('users')->with('success', "User \"{$user->title}\" successfully deleted");
     }
 
 }

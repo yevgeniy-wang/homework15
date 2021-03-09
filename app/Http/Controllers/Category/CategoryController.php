@@ -31,12 +31,7 @@ class CategoryController
 
         $category = Category::create($data);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Category \"{$category->title}\" successfully saved"
-        ];
-
-        return redirect()->route('categories');
+        return redirect()->route('categories')->with('success', "Category \"{$category->title}\" successfully saved");
     }
 
     public function edit(Category $category)
@@ -53,23 +48,13 @@ class CategoryController
 
         $category->update($data);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Category \"{$category->title}\" successfully saved"
-        ];
-
-        return redirect()->route('categories');
+        return redirect()->route('categories')->with('success', "Category \"{$category->title}\" successfully saved");
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Category \"{$category->title}\" successfully deleted"
-        ];
-
-        return redirect()->route('categories');
+        return redirect()->route('categories')->with('success', "Category \"{$category->title}\" successfully deleted");
     }
 }

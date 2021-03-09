@@ -33,12 +33,7 @@ class TagController
 
         $tag = Tag::create($data);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Tag \"{$tag->title}\" successfully saved"
-        ];
-
-        return redirect()->route('tags');
+        return redirect()->route('tags')->with('success', "Tag \"{$tag->title}\" successfully saved");
     }
 
     public function edit(Tag $tag)
@@ -55,23 +50,13 @@ class TagController
 
         $tag->update($data);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Tag \"{$tag->title}\" successfully saved"
-        ];
-
-        return redirect()->route('tags');
+        return redirect()->route('tags')->with('success', "Tag \"{$tag->title}\" successfully saved");
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Tag \"{$tag->title}\" successfully deleted"
-        ];
-
-        return redirect()->route('tags');
+        return redirect()->route('tags')->with('success', "Tag \"{$tag->title}\" successfully deleted");
     }
 }

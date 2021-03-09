@@ -93,12 +93,7 @@ class PostController
         $post = Post::create($data);
         $post->tags()->attach($data['tags']);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Post \"{$post->title}\" successfully saved"
-        ];
-
-        return redirect()->route('posts');
+        return redirect()->route('posts')->with('success', "Post \"{$post->title}\" successfully saved");
     }
 
     public function edit(Post $post)
@@ -122,23 +117,13 @@ class PostController
         $post->update($data);
         $post->tags()->sync($data['tags']);
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Post \"{$post->title}\" successfully saved"
-        ];
-
-        return redirect()->route('posts');
+        return redirect()->route('posts')->with('success', "Post \"{$post->title}\" successfully saved");
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
 
-        $_SESSION['message'] = [
-            'status' => 'success',
-            'text'   => "Post \"{$post->title}\" successfully deleted"
-        ];
-
-        return redirect()->route('posts');
+        return redirect()->route('posts')->with('success', "Post \"{$post->title}\" successfully deleted");
     }
 }
